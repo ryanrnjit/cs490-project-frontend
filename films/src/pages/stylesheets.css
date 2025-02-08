@@ -1,0 +1,37 @@
+/*
+Color Palette 
+#c2f970 Green
+#44344f Dark Purple
+#564d80 Ultra Violet
+#98a6d4 Light Blue
+#d3fcd5 Tea Green
+*/
+
+h1 {
+    text-align: center;
+}
+
+body {
+    background-color: #24272b;
+}
+
+.topfiverentallisting {
+    padding: 20pt;
+}
+
+.titleHeader {
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+#splash {
+    background-color: #4a525a;
+    width: 75%;
+    margin: auto;
+    padding: 30pt;
+    border-radius: 2pt;
+}
