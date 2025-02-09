@@ -28,10 +28,15 @@ body {
     flex-direction: row;
 }
 
+hr {
+    color: black;
+}
+
 #splash {
     background-color: #4a525a;
     width: 75%;
     margin: auto;
+    margin-top: 24pt;
     padding: 30pt;
-    border-radius: 2pt;
+    border-radius: 5pt;
 }
