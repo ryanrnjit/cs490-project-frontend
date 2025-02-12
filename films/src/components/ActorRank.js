@@ -12,7 +12,7 @@ function ActorRank({name, count, className, id}){
             <span style={{padding:'10pt'}}>
                 <h2>{name}</h2>
                 <p><em>Featured in <strong>{count}</strong> Movies!</em></p>
-                <button>See more details</button>
+                <button onClick={()=>{console.log(id); navigate("/actordetails", {state: {actor_id: id, actor_name: name}})}}>See more details</button>
             </span>
 
         </div>
