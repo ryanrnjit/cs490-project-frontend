@@ -7,20 +7,23 @@ export const Nav = styled.nav`
     height: 40px;
     display: flex;
     justify-content: space-between;
-    padding: 1vh calc((90vw - 1000px) / 2);
+    padding: 1vh calc((100vw - 350px) / 2);
     z-index: 12;
 `;
 
 export const NavLink = styled(Link)`
-    color: #98a6d4;
+    color: white;
     display: flex;
+    background-color:rgb(93, 130, 252);
+    border-radius: 15pt;
     align-items: center;
     text-decoration: none;
     padding: 0 1rem;
     height: 100%;
+    margin: 10pt;
     cursor: pointer;
     &.active {
-        color:rgb(255, 255, 255);
+        background-color:cornflowerblue;
     }
 `;
 
