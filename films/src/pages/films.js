@@ -34,7 +34,7 @@ const Films = () => {
             <h1>Sakila Film Search</h1>
             </div>
             <div id="splash">
-            <input id="searchbox" onChange={(e)=>{setSearchTerm(e.currentTarget.value)}}></input>
+            <input id="searchbox" placeholder="Type film title, actor, or genre to search" onChange={(e)=>{setSearchTerm(e.currentTarget.value)}}></input>
             <p>{(data.result_count) ? `Found ${data.result_count} Results` : 'Enter film title, actor name, or genre to make a search.'}</p>
             <table>
                 {results}
