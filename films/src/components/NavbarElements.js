@@ -6,6 +6,7 @@ export const Nav = styled.nav`
     background: #004ba8;
     height: 40px;
     display: flex;
+    user-select: none;
     justify-content: space-between;
     padding: 1vh calc((100vw - 350px) / 2);
     z-index: 12;

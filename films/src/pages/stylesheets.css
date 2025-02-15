@@ -11,6 +11,28 @@ h1 {
     text-align: center;
 }
 
+.pagination {
+    display: flex;
+    flex-direction: row;
+    width:fit-content;
+    margin: 20pt auto 0 auto;
+    list-style: none;
+    user-select: none;
+    gap: 10pt;
+}
+.pagination > li {
+    background-color: #84b9ff;
+    border-radius: 2pt;
+    cursor: pointer;
+    padding: 5pt;
+}
+.pagination > li:hover {
+    background-color: #4386dd;
+}
+li:has(.pagselected) {
+    background-color: #2483ff;
+}
+
 #searchbox {
     width: 256pt;
 }

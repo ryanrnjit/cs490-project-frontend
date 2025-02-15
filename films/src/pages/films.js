@@ -16,14 +16,23 @@ function FilmListing({actor, genre, film_id, title}) {
 
 const Films = () => {
     const [searchTerm, setSearchTerm] = useState("");
+    const [timerEvent, setTimerEvent] = useState(false);
     const [data, setData] = useState([{}]);
+    let timer = null;
+    const updateQuery = (e) => {
+        setSearchTerm(e.currentTarget.value);
+        if(timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(()=>{setTimerEvent(!timerEvent)}, 2000);
+    }
     useEffect(()=>{
         fetch(`/search?search=${encodeURI(searchTerm)}`).then(
             resp => resp.json()
         ).then(
             data => setData(data)
         );
-    }, [searchTerm]);
+    }, [timerEvent]);
     let results = data.films?.map((film, i) => (
         <FilmListing actor={film.actor_names} genre={film.category_name} film_id={film.film_id} title={film.title}/>
     ))
@@ -34,9 +43,15 @@ const Films = () => {
             <h1>Sakila Film Search</h1>
             </div>
             <div id="splash">
-            <input id="searchbox" placeholder="Type film title, actor, or genre to search" onChange={(e)=>{setSearchTerm(e.currentTarget.value)}}></input>
+            <input id="searchbox" placeholder="example: Documentary" onChange={(e)=>{updateQuery(e)}}></input>
             <p>{(data.result_count) ? `Found ${data.result_count} Results` : 'Enter film title, actor name, or genre to make a search.'}</p>
-            <table>
+            <table style={{width: '100%'}}>
+                <tr>
+                    <th>Title</th>
+                    <th>Actors</th>
+                    <th>Genre</th>
+                    <th>View Details</th>
+                </tr>
                 {results}
             </table>
             </div>

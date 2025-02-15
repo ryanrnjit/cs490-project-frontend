@@ -10,6 +10,7 @@ import Home from "./pages";
 import FilmDetails from './pages/filmdetails.js';
 import ActorDetails from './pages/actordetails.js';
 import Films from './pages/films.js'
+import Customers from './pages/customers.js';
 
 function App() {
     return(
@@ -20,6 +21,7 @@ function App() {
                 <Route exact path="/filmdetails" element={<FilmDetails />}/>
                 <Route exact path="/actordetails" element={<ActorDetails />}/>
                 <Route exact path="/films" element={<Films />}/>
+                <Route exact path="/customers" element={<Customers />}/>
             </Routes>
         </Router>
     );
