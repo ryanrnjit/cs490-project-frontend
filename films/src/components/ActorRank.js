@@ -11,7 +11,7 @@ function ActorRank({name, count, className, id}){
             <img src={`https://placehold.co/172?text=${encodeURI(name)}`}></img>
             <span style={{padding:'10pt'}}>
                 <h2>{name}</h2>
-                <p><em>Featured in <strong>{count}</strong> Movies!</em></p>
+                <p><em>Featured in <strong>{count}</strong> {count > 1 ? "Films." : "Film."}</em></p>
                 <button onClick={()=>{console.log(id); navigate("/actordetails", {state: {actor_id: id, actor_name: name}})}}>See more details</button>
             </span>
 

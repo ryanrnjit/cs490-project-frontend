@@ -12,7 +12,7 @@ function FilmRentalRank({title, count, className, id}){
                 <img src={`https://placehold.co/171x244?text=${encodeURI(title)}`}></img>
                 <span style={{padding: '10pt'}}>
                     <h2>{title}</h2>
-                    <p>Rental Count: {count}</p>
+                    <p><em>Rental Count: <strong>{count}</strong></em></p>
                     <button onClick={()=>{console.log(id); navigate("/filmdetails", {state: {film_id: id}})}}>See details.</button>
                 </span>
             </div>

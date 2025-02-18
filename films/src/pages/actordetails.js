@@ -27,6 +27,7 @@ const ActorDetails = () => {
                             <li>{film.title} <button onClick={()=>{navigate("/filmdetails", {state: {film_id: film.film_id}})}}><em>See Details</em></button></li>
                         ))}
                     </ol>
+                    <sup>(id: {actor_id})</sup><br/>
                     <button onClick={()=>{navigate("/")}}>← Go Home</button>
                 </span>
             </div>

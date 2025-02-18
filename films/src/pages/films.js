@@ -9,7 +9,7 @@ function FilmListing({actor, genre, film_id, title}) {
             <td>{title}</td>
             <td>{actor}</td>
             <td>{genre}</td>
-            <td><button onClick={()=>{navigate("/filmdetails", {state: {film_id: film_id}})}}>Details</button></td>
+            <td><button style={{width:'100%', height:'100%'}} onClick={()=>{navigate("/filmdetails", {state: {film_id: film_id}})}}>Details</button></td>
         </tr>
     );
 }

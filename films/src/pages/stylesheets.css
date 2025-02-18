@@ -9,6 +9,7 @@ Color Palette
 
 h1 {
     text-align: center;
+    color:rgb(224, 224, 224);
 }
 
 .pagination {
@@ -24,7 +25,7 @@ h1 {
     background-color: #84b9ff;
     border-radius: 2pt;
     cursor: pointer;
-    padding: 5pt;
+    padding: 5pt 0;
 }
 .pagination > li:hover {
     background-color: #4386dd;
@@ -32,9 +33,14 @@ h1 {
 li:has(.pagselected) {
     background-color: #2483ff;
 }
+.pagination > li > a {
+    padding:5pt;
+}
 
 #searchbox {
     width: 256pt;
+    height: 20pt;
+    font-size: medium;
 }
 
 body {

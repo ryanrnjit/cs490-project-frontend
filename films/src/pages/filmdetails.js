@@ -21,15 +21,16 @@ const FilmDetails = () => {
                 
                 <img id="filmposter" src={`https://placehold.co/285x406?text=${encodeURI((data['title']) ? data['title'] : "Loading...")}`}></img>
                 <span style={{padding:'10pt'}} id="details">
-                    <h2>Title: {data['title']}</h2>
+                    <strong style={{fontSize:'x-large'}}>Title: {data['title']}</strong><br/>
                     <p>Description<br/>{data['description']}</p>
                     <p><em>Rated <strong>{data['rating']}</strong></em></p>
                     <p>Genre: <em>{data['genre']}</em></p>
                     <p>Runtime: {data['length']} Minutes</p>
                     <p>Released: {data['release_year']}</p>
                     <p>Includes special features: {data['special_features']?.replaceAll(',', ', ')}</p>
-                    <p>Rent now for {data['rental_duration']} weeks at ${data['rental_rate']} a week.</p>
-                    <p><em>Replacement charges apply for lost items (${data['replacement_cost']})</em></p>
+                    <p>Rental rate: ${data['rental_rate']} a week for {data['rental_duration']} weeks.</p>
+                    <p>Replacement charges for lost items: ${data['replacement_cost']}</p>
+                    <sup>(id: {data['film_id']})</sup><br/>
                     <button onClick={()=>{navigate("/")}}>← Go Home</button>
                     </span>
             </div>
