@@ -24,7 +24,7 @@ const Films = () => {
         if(timer) {
             clearTimeout(timer);
         }
-        timer = setTimeout(()=>{setTimerEvent(!timerEvent)}, 2000);
+        timer = setTimeout(()=>{setTimerEvent(!timerEvent)}, 1500);
     }
     useEffect(()=>{
         fetch(`/search?search=${encodeURI(searchTerm)}`).then(
@@ -44,7 +44,7 @@ const Films = () => {
             </div>
             <div id="splash">
             <input id="searchbox" placeholder="example: Documentary" onChange={(e)=>{updateQuery(e)}}></input>
-            <p>{(data.result_count) ? `Found ${data.result_count} Results` : 'Enter film title, actor name, or genre to make a search.'}</p>
+            <p>{(data.result_count) ? `Found ${data.result_count} Results` : 'No results. Enter a film title, actor name, or genre to make a search.'}</p>
             <table style={{width: '100%'}}>
                 <tr>
                     <th>Title</th>

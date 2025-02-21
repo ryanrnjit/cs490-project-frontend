@@ -7,10 +7,16 @@ Color Palette
 #d3fcd5 Tea Green
 */
 
-h1 {
+h1, h2, h3 {
     text-align: center;
     color:rgb(224, 224, 224);
 }
+
+p {
+    color:rgb(224, 224, 224);
+}
+
+
 
 .pagination {
     display: flex;
@@ -45,6 +51,7 @@ li:has(.pagselected) {
 
 body {
     background-color: #24272b;
+    color:rgb(224, 224, 224);
 }
 
 .topfiverentallisting {
@@ -52,7 +59,7 @@ body {
 }
 
 .titleHeader {
-    color: white;
+    color:rgb(224, 224, 224);
 }
 
 .container {
@@ -62,6 +69,11 @@ body {
 
 hr {
     color: black;
+}
+
+table, td, th {
+    color:rgb(224, 224, 224);
+    border-color:rgb(224, 224, 224);
 }
 
 #splash {
