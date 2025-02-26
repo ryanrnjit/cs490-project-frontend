@@ -12,8 +12,6 @@ import ActorDetails from './pages/actordetails.js';
 import Films from './pages/films.js'
 import Customers from './pages/customers.js';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 function App() {
     return(
         <Router>
