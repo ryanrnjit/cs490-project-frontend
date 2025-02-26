@@ -9,7 +9,7 @@ function FilmRentalRank({title, count, className, id}){
     
     return(
             <div class="container" style={{marginTop:'10pt'}}>
-                <img src={`https://placehold.co/171x244?text=${encodeURI(title)}`}></img>
+                <img class="image" src={`https://placehold.co/171x244?text=${encodeURI(title)}`}></img>
                 <span style={{padding: '10pt'}}>
                     <h2>{title}</h2>
                     <p><em>Rental Count: <strong>{count}</strong></em></p>

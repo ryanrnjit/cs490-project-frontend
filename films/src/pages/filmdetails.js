@@ -19,7 +19,7 @@ const FilmDetails = () => {
             <h1 id="titleHeader">Film Details: {data['title']}</h1>
             <div id="splash" class="container">
                 
-                <img id="filmposter" src={`https://placehold.co/285x406?text=${encodeURI((data['title']) ? data['title'] : "Loading...")}`}></img>
+                <img class="image" id="filmposter" src={`https://placehold.co/285x406?text=${encodeURI((data['title']) ? data['title'] : "Loading...")}`}></img>
                 <span style={{padding:'10pt'}} id="details">
                     <strong style={{fontSize:'x-large'}}>Title: {data['title']}</strong><br/>
                     <p>Description<br/>{data['description']}</p>
