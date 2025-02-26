@@ -41,6 +41,7 @@ li:has(.pagselected) {
 }
 .pagination > li > a {
     padding:5pt;
+    color: black;
 }
 
 #searchbox {
@@ -49,8 +50,26 @@ li:has(.pagselected) {
     font-size: medium;
 }
 
+.image {
+    border: solid black medium;
+    border-radius: 5pt;
+    background-color: #dddddd;
+    height: auto;
+}
+
+.linkbutton {
+    background-color: transparent;
+    border:none;
+    color:rgb(224, 224, 224);
+    cursor: pointer;
+}
+
+.linkbutton:hover {
+    color:#84b9ff;
+}
+
 body {
-    background-color: #24272b;
+    background-color: #4a525a;
     color:rgb(224, 224, 224);
 }
 
@@ -72,12 +91,35 @@ hr {
 }
 
 table, td, th {
-    color:rgb(224, 224, 224);
-    border-color:rgb(224, 224, 224);
+    color:rgb(0, 0, 0);
+    border-color:rgb(0, 0, 0);
+    border-width: 1pt;
+    border-spacing: 0;
+    
+    th {
+        color: white;
+        background-color: #4386dd;
+    }
+}
+
+table {
+    background-color: #4a525a;
+}
+tr {
+    height: 2em;
+}
+tr:nth-child(odd){
+    background-color: #c9c9c9;
+}
+tr:nth-child(even) {
+    background-color: #9b9b9b;
+}
+tr:hover{
+    background-color: #94a9c4;
 }
 
 #splash {
-    background-color: #4a525a;
+    background-color: #24272b;
     width: 75%;
     margin: auto;
     margin-top: 24pt;

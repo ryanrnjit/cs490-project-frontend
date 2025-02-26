@@ -8,7 +8,7 @@ function ActorRank({name, count, className, id}){
     return(
         <>
         <div class="container" style={{marginTop:'10pt'}}>
-            <img src={`https://placehold.co/172?text=${encodeURI(name)}`}></img>
+            <img class="image" src={`https://placehold.co/172?text=${encodeURI(name)}`}></img>
             <span style={{padding:'10pt'}}>
                 <h2>{name}</h2>
                 <p><em>Featured in <strong>{count}</strong> {count > 1 ? "Films." : "Film."}</em></p>

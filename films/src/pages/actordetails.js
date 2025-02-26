@@ -19,12 +19,12 @@ const ActorDetails = () => {
             <h1 id="titleHeader">Actor Details: {actor_name}</h1>
             <div id="splash" class="container">
                 
-                <img id="actorpicture" src={`https://placehold.co/325?text=${encodeURI(actor_name)}`}></img>
+                <img class="image" id="actorpicture" src={`https://placehold.co/325?text=${encodeURI(actor_name)}`}></img>
                 <span style={{padding:'10pt'}} id="details">
                     <strong>{actor_name} Top 5 Movies:</strong>
                     <ol>
                         {data.films?.map((film, i) => (
-                            <li>{film.title} <button onClick={()=>{navigate("/filmdetails", {state: {film_id: film.film_id}})}}><em>See Details</em></button></li>
+                            <li> <button class="linkbutton" onClick={()=>{navigate("/filmdetails", {state: {film_id: film.film_id}})}}><em>{film.title}</em></button></li>
                         ))}
                     </ol>
                     <sup>(id: {actor_id})</sup><br/>
