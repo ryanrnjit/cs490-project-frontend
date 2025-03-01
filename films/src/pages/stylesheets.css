@@ -16,8 +16,6 @@ p {
     color:rgb(224, 224, 224);
 }
 
-
-
 .pagination {
     display: flex;
     flex-direction: row;
@@ -125,4 +123,53 @@ tr:hover{
     margin-top: 24pt;
     padding: 30pt;
     border-radius: 5pt;
+}
+
+.popup-content {
+    background-color: #24272bee;
+    animation: FadeIn 0.25s;
+    width: 30%;
+    padding: 20pt 50pt 45pt;
+    border-radius: 5pt;
+}
+.popup-overlay {
+    background-color: rgba(70, 70, 70, 0.5);
+    animation: FadeIn 0.25s;
+  }
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    top:5pt;
+    right:5pt;
+    border-radius:10pt;
+    width:25pt;
+    background-color: #84b9ff;
+    height:25pt;
+}
+
+@keyframes FadeIn {
+    0% { opacity: 0; };
+    100% { opacity: 1; };
+}
+
+button {
+    border-radius: 10pt;
+    padding: 5pt;
+    background-color: #94a9c4;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #84b9ff;
+}
+
+button:disabled {
+    background-color: #9b9b9b;
+    cursor: not-allowed;
+}
+
+input[type='text'], input[type='number'] {
+    padding: 5pt;
+    border-radius: 10pt;
 }
