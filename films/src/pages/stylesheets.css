@@ -60,10 +60,15 @@ li:has(.pagselected) {
     border:none;
     color:rgb(224, 224, 224);
     cursor: pointer;
+    background-color: transparent;
+    animation:none;
+    
 }
 
 .linkbutton:hover {
     color:#84b9ff;
+    background-color: transparent;
+    animation:none;
 }
 
 body {
@@ -108,12 +113,24 @@ tr {
 }
 tr:nth-child(odd){
     background-color: #c9c9c9;
+    animation: TRBlueOut 0.2s;
 }
 tr:nth-child(even) {
     background-color: #9b9b9b;
+    animation: TRBlueOut 0.2s;
 }
 tr:hover{
     background-color: #94a9c4;
+    animation: TRBlueIn 0.2s;
+}
+
+@keyframes TRBlueIn {
+    0% {background-color: auto;};
+    100% { background-color: #94a9c4; };
+}
+@keyframes TRBlueOut {
+    0% { background-color: #94a9c4; };
+    100% {background-color: auto;};
 }
 
 #splash {
@@ -156,12 +173,23 @@ tr:hover{
 button {
     border-radius: 10pt;
     padding: 5pt;
-    background-color: #94a9c4;
+    background-color: #e6e6e6;
     cursor: pointer;
+    animation: ButtonBlueOut 0.2s;
 }
 
 button:hover {
     background-color: #84b9ff;
+    animation: ButtonBlueIn 0.2s;
+}
+
+@keyframes ButtonBlueIn {
+    0% {background-color: #e6e6e6;};
+    100% { background-color: #84b9ff; };
+}
+@keyframes ButtonBlueOut {
+    0% { background-color: #84b9ff; };
+    100% {background-color: #e6e6e6;};
 }
 
 button:disabled {
