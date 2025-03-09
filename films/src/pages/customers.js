@@ -35,16 +35,20 @@ function PaginatedItems({itemsPerPage}){
     const [pageCount, setPageCount] = useState(0);
     const [currentItems, setCurrentItems] = useState(null);
     const [data, setData] = useState([{}]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [timerEvent, setTimerEvent] = useState(false);
+    let timer = null;
     useEffect(()=>{
-        fetch('/customerlist')
+        fetch(`/customerlist?search_type=${encodeURI(document.getElementById("filter").value)}&search_term=${encodeURI(searchTerm)}`)
             .then(resp => resp.json())
             .then(data => setData(data))
-    }, [FormSubmittedFlag]);
+    }, [FormSubmittedFlag, timerEvent]);
     useEffect(()=>{
-        console.log(items);
+        
         const endOffset = itemOffset + itemsPerPage;
         setCurrentItems((items) ? items.slice(itemOffset, endOffset) : []);
-        setPageCount(Math.ceil(items ? items.length : 0 / itemsPerPage));
+        setPageCount(Math.ceil((items ? items.length : 0) / itemsPerPage));
+        console.log(items, pageCount, items ? items.length : 0, itemsPerPage, (items ? items.length : 0) / itemsPerPage);
     }, [data, itemOffset, itemsPerPage, ForceRerender]);
     let items = data.customers?.map((customer, i) => (
         <tr>
@@ -63,6 +67,12 @@ function PaginatedItems({itemsPerPage}){
         </tr>
     ));
 
+    function handleChange(){
+        document.getElementById("searchbar").disabled = (document.getElementById("filter").value == "0")
+        setSearchTerm(document.getElementById("searchbar").value)
+        timer = setTimeout(()=>{setTimerEvent(!timerEvent)}, 1500);
+    }
+
     const pageOnClick = (e) => {
         const newOffset = (e.selected * itemsPerPage) % items.length;
         setItemOffset(newOffset);
@@ -70,6 +80,14 @@ function PaginatedItems({itemsPerPage}){
 
     return (
         <div>
+            <input id="searchbar" disabled type="text" onChange={handleChange} placeholder="Search by filter"></input>
+            <label for="filter">  Filter Search:</label>
+            <select id="filter" onChange={handleChange}>
+                <option value="0">No Filter</option>
+                <option value="1">ID</option>
+                <option value="2">First Name</option>
+                <option value="3">Last Name</option>
+            </select> <br/><br/>
             <table id="customer-table" style={{width:'100%'}}>
                 <tr>
                     <th>ID</th>
