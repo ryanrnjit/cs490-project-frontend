@@ -92,10 +92,10 @@ function FilmListing({actor, genre, film_id, title}) {
             <td>
                 <button style={{width:'100%', height:'100%'}} onClick={()=>setOpen(true)}>Rent</button>
                 <Popup open={open} onClose={closeModal} modal>
-                <div>
-                    <RentalForm title={title} film_id={film_id}/>
-                    <button className="close" onClick={closeModal}><strong>X</strong></button>
-                </div>
+                    <div>
+                        <RentalForm title={title} film_id={film_id}/>
+                        <button className="close" onClick={closeModal}><strong>X</strong></button>
+                    </div>
                 </Popup>
             </td>
         </tr>

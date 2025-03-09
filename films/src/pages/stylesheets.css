@@ -74,6 +74,7 @@ li:has(.pagselected) {
 body {
     background-color: #4a525a;
     color:rgb(224, 224, 224);
+    font-family: 'verdana'
 }
 
 .topfiverentallisting {
@@ -197,7 +198,7 @@ button:disabled {
     cursor: not-allowed;
 }
 
-input[type='text'], input[type='number'] {
+input[type='text'], input[type='number'], select {
     padding: 5pt;
     border-radius: 10pt;
 }
