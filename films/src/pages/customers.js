@@ -8,6 +8,131 @@ import { useState, useEffect } from "react";
 var FormSubmittedFlag = false;
 var ForceRerender = 0;
 
+function ReturnButton({rental_id, name, returnable}){
+    const [data, setData] = useState([{}]);
+    function returnrequest(){
+        if(window.confirm(`Return Customer ${name}'s rental?`)) {
+            const requestOptions = {
+                method: 'PATCH',
+            };
+            fetch(`/returnfilm/${rental_id}`, requestOptions)
+            .then(resp => resp.json())
+            .then(data => setData(data))
+        }
+    }
+    useEffect(()=>{
+        if(data.message){
+            alert(data.message);
+            document.querySelector(".close").click();
+        }},[data]);
+    let isDisabled = {disabled: !returnable}
+    return(
+        <span style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+            <button {...isDisabled} title="Return Film" onClick={returnrequest}>📩</button>
+        </span>
+    )
+}
+
+function PaginatedRentalItems({itemsPerPage, customer_id, name}) {
+    const [rentalData, setRentalData] = useState([{}]);
+    const [itemOffset, setItemOffset] = useState(0);
+    const [pageCount, setPageCount] = useState(0);
+    const [currentItems, setCurrentItems] = useState(null);
+
+    useEffect(()=>{
+        fetch(`/customerrentals/${customer_id}`)
+        .then(resp => resp.json())
+        .then(data => setRentalData(data))
+    }, []);
+    useEffect(()=>{
+        const endOffset = itemOffset + itemsPerPage;
+        setCurrentItems((items) ? items.slice(itemOffset, endOffset) : []);
+        setPageCount(Math.ceil((items ? items.length : 0) / itemsPerPage));
+        console.log(items, pageCount, items ? items.length : 0, itemsPerPage, (items ? items.length : 0) / itemsPerPage);
+    }, [rentalData, itemOffset, itemsPerPage]);
+    var items = rentalData.rentals?.map((rental, i)=>(
+        <tr>
+            <td>{rental.rental_id}</td>
+            <td>{rental.inventory_id}</td>
+            <td>{rental.rental_date}</td>
+            <td>{((rental.return_date == null) ? "Not Returned" : rental.return_date)}</td>
+            <td><ReturnButton returnable={(rental.return_date == null)} rental_id={rental.rental_id} name={name}/></td>
+        </tr>
+    ))
+    const pageOnClick = (e) => {
+        const newOffset = (e.selected * itemsPerPage) % items.length;
+        setItemOffset(newOffset);
+    };
+    return(
+        <>
+            <h2>Rental History:</h2>
+            <table style={{width: '100%'}}>
+                <tr>
+                    <th>Rental ID</th>
+                    <th>Inventory ID</th>
+                    <th>Rental Date</th>
+                    <th>Date Returned</th>
+                    <th>Options</th>
+                </tr>
+                {currentItems}
+            </table>
+            <ReactPaginate 
+                breakLabel="..."
+                nextLabel="→"
+                onPageChange={pageOnClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="←"
+                containerClassName="pagination"
+                activeLinkClassName="pagselected"
+            />
+        </>
+    );
+}
+
+function CustomerDetails({customer_id, name}){
+    const [customerData, setCustomerData] = useState([{}]);
+    
+    useEffect(()=>{
+        fetch(`/getcustomer/${customer_id}`)
+        .then(resp => resp.json())
+        .then(data => setCustomerData(data))
+    },[]);
+    return (
+        <>
+            <h2>Customer Details: {name}</h2>
+            <p><strong>Full name: </strong>{name}</p>
+            <p><strong>Email address: </strong>{customerData['email']}</p>
+            <p><strong>Phone number: </strong>{(customerData['phone'] != ' ') ? customerData['phone'] : "No phone number on record"}</p>
+            <p><strong>Address: </strong>{customerData['address']}</p>
+            <p><strong>Address 2: </strong>{(customerData['address2'] != null) ? customerData['address2'] : "None"}</p>
+            <p><strong>District: </strong>{(customerData['district'] != " ") ? customerData['district'] : "None"}</p>
+            <p><strong>City: </strong>{customerData['city']}</p>
+            <p><strong>Country: </strong>{customerData['country']}</p>
+            <p><strong>Zipcode: </strong>{customerData['postal_code']}</p>
+            <p><strong>Account created: </strong>{customerData['create_date']}</p>
+            <sup>(id: {customerData['customer_id']})</sup>
+            <PaginatedRentalItems itemsPerPage={5} customer_id={customer_id} name={name}/>
+        </>
+    );
+}
+
+function ViewButton({customer_id, name}){
+    const [open, setOpen] = useState(false);
+    const closeModal = () => setOpen(false);
+    return (
+        <>
+            <button title="Customer Details" onClick={()=>setOpen(true)}>📃</button>
+            <Popup open={open} onClose={closeModal} modal>
+                <div>
+                    <CustomerDetails customer_id={customer_id} name={name}/>
+                    <button className="close" onClick={closeModal}><strong>X</strong></button>
+                </div>
+            </Popup>
+        </>
+    );
+}
+
 function DeleteButton({customer_id, name}){
     const [data, setData] = useState([{}]);
     function deleterequest(){
@@ -44,11 +169,9 @@ function PaginatedItems({itemsPerPage}){
             .then(data => setData(data))
     }, [FormSubmittedFlag, timerEvent]);
     useEffect(()=>{
-        
         const endOffset = itemOffset + itemsPerPage;
         setCurrentItems((items) ? items.slice(itemOffset, endOffset) : []);
         setPageCount(Math.ceil((items ? items.length : 0) / itemsPerPage));
-        console.log(items, pageCount, items ? items.length : 0, itemsPerPage, (items ? items.length : 0) / itemsPerPage);
     }, [data, itemOffset, itemsPerPage, ForceRerender]);
     let items = data.customers?.map((customer, i) => (
         <tr>
@@ -60,9 +183,10 @@ function PaginatedItems({itemsPerPage}){
             <td>{customer.city}</td>
             <td>{customer.zip_code}</td>
             <td>{customer.country}</td>
-            <td>
-                <DeleteButton customer_id={customer.customer_id} name={customer.name}/>
+            <td style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', gap: '5pt'}}>
+                <ViewButton customer_id={customer.customer_id} name={customer.name}/>
                 <EditButton customer_id={customer.customer_id} name={customer.name}/>
+                <DeleteButton customer_id={customer.customer_id} name={customer.name}/>
             </td>
         </tr>
     ));
@@ -152,19 +276,20 @@ function EditCustomerForm({customer_id}){
             document.getElementById("lname").value = data.last_name;
             document.getElementById("addr").value = data.address;
             document.getElementById("secaddr").value = data.address2;
+            document.getElementById("district").value = data.district.trim();
             document.getElementById("city").value = data.city;
             document.getElementById("zip").value = data.postal_code;
             document.getElementById("email").value = data.email;
-            document.getElementById("phone").value = data.phone;
+            document.getElementById("phone").value = data.phone.trim();
             document.getElementById("country").value = data.country_id;
             setFormData({
                 country_id: data.country_id,
                 address: data.address,
                 address2: data.address2,
                 city: data.city,
-                district: data.district,
+                district: data.district.trim(),
                 postal_code: data.postal_code,
-                phone: data.phone,
+                phone: data.phone.trim(),
                 first_name: data.first_name,
                 last_name: data.last_name,
                 email: data.email,
@@ -231,6 +356,7 @@ function EditCustomerForm({customer_id}){
                 <input id="lname" required style={{margin: '0 20pt'}} type="text" name="last_name" placeholder="Last Name" onChange={handleChange}></input> <br/><br/>
                 <input id="addr" style={{width: '67%'}} required type="text" name="address" placeholder="Address" onChange={handleChange}></input> <br/><br/>
                 <input id="secaddr" style={{width: '67%'}} type="text" name="address2" placeholder="Second Address (optional)" onChange={handleChange}></input> <br/><br/>
+                <input id="district" style={{width: '67%'}} type="text" name="district" placeholder="District (optional)" onChange={handleChange}></input> <br/><br/>
                 <input id="city" required type="text" name="city" placeholder="City" onChange={handleChange}></input>  
                 <input id="zip" required style={{margin: '0 20pt'}} maxLength={5} type="text" pattern="[0-9]{5,5}" name="postal_code" placeholder="Zipcode" onChange={handleChange}></input> <br/><br/>
                 <input id="email" required type="text" name="email" placeholder="Email Address" onChange={handleChange}></input>
@@ -252,7 +378,7 @@ function EditButton({customer_id, name}){
     const closeModal = () => setOpen(false);
     return(
         <>
-        <button title="Edit Customer" onClick={()=>setOpen(true)}>📝</button>
+        <button title="Edit Customer" onClick={()=>setOpen(true)}>✍</button>
         <Popup open={open} onClose={closeModal} modal>
             <div>
                 <EditCustomerForm customer_id={customer_id}/>
@@ -302,7 +428,6 @@ function CreateCustomerForm() {
         }
         formSubmitted(true);
         FormSubmittedFlag = !FormSubmittedFlag;
-        if(window.confirm("Refresh page to see changes?")) window.location.reload();
     };
     //send POST data.
     useEffect(()=>{
@@ -325,6 +450,9 @@ function CreateCustomerForm() {
         if(responseData){
             document.getElementById("response").textContent = responseData.message;
             console.log(responseData.message)
+            if(responseData.message && responseData.message.includes("Success")) {
+                setTimeout(()=>{if(window.confirm("Refresh page to see changes?")) window.location.reload();}, 1000);
+            }
         }
         
     }, [responseData]);
@@ -340,6 +468,7 @@ function CreateCustomerForm() {
                 <input required style={{margin: '0 20pt'}} type="text" name="last_name" placeholder="Last Name" onChange={handleChange}></input> <br/><br/>
                 <input style={{width: '67%'}} required type="text" name="address" placeholder="Address" onChange={handleChange}></input> <br/><br/>
                 <input style={{width: '67%'}} type="text" name="address2" placeholder="Second Address (optional)" onChange={handleChange}></input> <br/><br/>
+                <input style={{width: '67%'}} type="text" name="district" placeholder="District (optional)" onChange={handleChange}></input> <br/><br/>
                 <input required type="text" name="city" placeholder="City" onChange={handleChange}></input>  
                 <input required style={{margin: '0 20pt'}} maxLength={5} type="text" pattern="[0-9]{5,5}" name="postal_code" placeholder="Zipcode" onChange={handleChange}></input> <br/><br/>
                 <input required type="text" name="email" placeholder="Email Address" onChange={handleChange}></input>

@@ -9,11 +9,11 @@ Color Palette
 
 h1, h2, h3 {
     text-align: center;
-    color:rgb(224, 224, 224);
+    color:rgb(41, 41, 41);
 }
 
 p {
-    color:rgb(224, 224, 224);
+    color:rgb(41, 41, 41);
 }
 
 .pagination {
@@ -26,20 +26,21 @@ p {
     gap: 10pt;
 }
 .pagination > li {
-    background-color: #84b9ff;
-    border-radius: 2pt;
+    background-color: #3e98ff;
+    border-radius: 5pt;
     cursor: pointer;
     padding: 5pt 0;
 }
 .pagination > li:hover {
-    background-color: #4386dd;
+    background-color: #305e9b;
 }
 li:has(.pagselected) {
-    background-color: #2483ff;
+    background-color: #0073ff;
 }
 .pagination > li > a {
     padding:5pt;
-    color: black;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
 }
 
 #searchbox {
@@ -49,7 +50,8 @@ li:has(.pagselected) {
 }
 
 .image {
-    border: solid black medium;
+    border: solid rgb(116, 116, 116) medium;
+    box-shadow: 0 3pt 5pt gray;
     border-radius: 5pt;
     background-color: #dddddd;
     height: auto;
@@ -58,7 +60,7 @@ li:has(.pagselected) {
 .linkbutton {
     background-color: transparent;
     border:none;
-    color:rgb(224, 224, 224);
+    color:rgb(26, 26, 26);
     cursor: pointer;
     background-color: transparent;
     animation:none;
@@ -66,15 +68,16 @@ li:has(.pagselected) {
 }
 
 .linkbutton:hover {
-    color:#84b9ff;
+    color:#4596ff;
+    font-weight: bold;
     background-color: transparent;
     animation:none;
 }
 
 body {
-    background-color: #4a525a;
-    color:rgb(224, 224, 224);
-    font-family: 'verdana'
+    background-color: #ffffff;
+    color:rgb(37, 37, 37);
+    font-family: 'helvetica'
 }
 
 .topfiverentallisting {
@@ -96,32 +99,32 @@ hr {
 
 table, td, th {
     color:rgb(0, 0, 0);
-    border-color:rgb(0, 0, 0);
-    border-width: 1pt;
+    border-color:rgb(80, 80, 80);
+    border-width: 1px;
     border-spacing: 0;
     
     th {
-        color: white;
-        background-color: #4386dd;
+        color: rgb(0, 72, 131);
+        background-color: #96c3ff;
     }
 }
 
 table {
-    background-color: #4a525a;
+    background-color: #8593a1;
 }
 tr {
     height: 2em;
 }
 tr:nth-child(odd){
-    background-color: #c9c9c9;
+    background-color: #c7c7c7;
     animation: TRBlueOut 0.2s;
 }
 tr:nth-child(even) {
-    background-color: #9b9b9b;
+    background-color: #e0e0e0;
     animation: TRBlueOut 0.2s;
 }
 tr:hover{
-    background-color: #94a9c4;
+    background-color: #b9d7ff;
     animation: TRBlueIn 0.2s;
 }
 
@@ -135,16 +138,17 @@ tr:hover{
 }
 
 #splash {
-    background-color: #24272b;
+    background-color: #f0f2f6;
     width: 75%;
     margin: auto;
     margin-top: 24pt;
     padding: 30pt;
     border-radius: 5pt;
+    box-shadow: 0pt 3pt 10pt rgb(158, 158, 158);
 }
 
 .popup-content {
-    background-color: #24272bee;
+    background-color: #a9c7ffe1;
     animation: FadeIn 0.25s;
     width: 30%;
     padding: 20pt 50pt 45pt;
@@ -162,7 +166,7 @@ tr:hover{
     right:5pt;
     border-radius:10pt;
     width:25pt;
-    background-color: #84b9ff;
+    background-color: #ffffff;
     height:25pt;
 }
 
